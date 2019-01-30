@@ -5,12 +5,9 @@ from scipy import signal
 def perform_blurring(M, sigma, bound="sym"):
     """
         perform_blurring - gaussian blurs an image
-
         M = perform_blurring(M, sigma, options);
-
         M is the original data
         sigma is the width of blurs (in pixels)
-
         Copyright (c) 2007 Gabriel Peyre
     """
 
@@ -40,22 +37,17 @@ def perform_blurring(M, sigma, bound="sym"):
 def compute_gaussian_filter(n,s,N):
     """
         compute_gaussian_filter - compute a 1D or 2D Gaussian filter.
-
           f = compute_gaussian_filter(n,s,N);
-
           'n' is the size of the filter, odd for no phase in the filter.
               (if too small it will alterate the filter).
               use n=[n1,n2] for a 2D filter or n = [n1] for a 1D filter
           's' is the standard deviation of the filter.
           'N' is the size of the big signal/image (supposed to lie in [0,1] or [0,1]x[0,1]).
               use N=[N1,N2] for a 2D filter or N = [N1] for a 1D filter
-
           The equation (in 1D) is
               f[k] = exp( -(x(k)^2/(2*s^2)) );
           where x spans [-1/2,1/2].
-
           The filter is normalised so that it sums to 1.
-
           Copyright (c) 2004 Gabriel Peyre
     """
     nd = 1;
@@ -77,16 +69,12 @@ def compute_gaussian_filter(n,s,N):
 def build_gaussian_filter_2d(n,s,N=[]):
     """
         build_gaussian_filter_2d - compute a 2D Gaussian filter.
-
         f = build_gaussian_filter_2d(n,s,N);
-
         'n' is the size of the filter, odd for no phase in the filter.
             (if too small it will alterate the filter).
         's' is the standard deviation of the filter.
         'N' is the size of the big image (supposed to lie in [0,1]x[0,1]).
-
         The filter is normalised so that it sums to 1.
-
         Copyright (c) 2004 Gabriel Peyre
     """
 
@@ -119,9 +107,7 @@ def build_gaussian_filter_2d(n,s,N=[]):
 def build_gaussian_filter_1d(n,s,N=[]):
     """
         build_gaussian_filter_1d - compute a Gaussian filter.
-
         f = build_gaussian_filter_1d(n,s,N);
-
         Copyright (c) 2004 Gabriel Peyre
     """
     if len(N) == 0:
@@ -145,18 +131,13 @@ def build_gaussian_filter_1d(n,s,N=[]):
 def perform_convolution(x,h,bound="sym"):
     """
         perform_convolution - compute convolution with centered filter.
-
         y = perform_convolution(x,h,bound);
-
         The filter 'h' is centred at 0 for odd
         length of the filter, and at 1/2 otherwise.
-
         This works either for 1D or 2D convolution.
         For 2D the matrix have to be square.
-
         'bound' is either 'per' (periodic extension)
         or 'sym' (symmetric extension).
-
         Copyright (c) 2004 Gabriel Peyre
     """
 
@@ -224,4 +205,4 @@ def perform_convolution(x,h,bound="sym"):
             h = np.vstack((h[d[0]:,:],np.vstack((np.zeros([n[0]-p[0],p[1]]),h[:(d[0]),:]))))
             h = np.hstack((h[:,d[1]:],np.hstack((np.zeros([n[0],n[1]-p[1]]),h[:,:(d[1])]))))
             y = np.real(pyl.ifft2(pyl.fft2(x)*pyl.fft2(h)))
-    return y
+return y
