@@ -205,4 +205,4 @@ def perform_convolution(x,h,bound="sym"):
             h = np.vstack((h[d[0]:,:],np.vstack((np.zeros([n[0]-p[0],p[1]]),h[:(d[0]),:]))))
             h = np.hstack((h[:,d[1]:],np.hstack((np.zeros([n[0],n[1]-p[1]]),h[:,:(d[1])]))))
             y = np.real(pyl.ifft2(pyl.fft2(x)*pyl.fft2(h)))
-return y
+    return y
