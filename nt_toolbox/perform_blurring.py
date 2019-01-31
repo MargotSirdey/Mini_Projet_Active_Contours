@@ -103,7 +103,6 @@ def build_gaussian_filter_2d(n,s,N=[]):
     f = f/np.sum(f)
     return f
 
-
 def build_gaussian_filter_1d(n,s,N=[]):
     """
         build_gaussian_filter_1d - compute a Gaussian filter.
@@ -126,7 +125,6 @@ def build_gaussian_filter_1d(n,s,N=[]):
     f = np.exp(-x**2/(2*s**2))
     f = f/np.sum(f)
     return f
-
 
 def perform_convolution(x,h,bound="sym"):
     """
@@ -197,12 +195,11 @@ def perform_convolution(x,h,bound="sym"):
         n = np.asarray(n)
         p = np.asarray(p)
         d = np.floor((p-1)/2.)
-        print(n)
         if nd == 1:
             h = np.vstack((h[d:],np.vstack((np.zeros(n-p),h[:d]))))
             y = np.real(pyl.ifft(pyl.fft(x)*pyl.fft(h)))
         else:
-            h = np.vstack((h[d[0]:,:],np.vstack((np.zeros([n[0]-p[0],p[1]]),h[:(d[0]),:]))))
-            h = np.hstack((h[:,d[1]:],np.hstack((np.zeros([n[0],n[1]-p[1]]),h[:,:(d[1])]))))
+            h = np.vstack((h[int(d[0]):,:],np.vstack((np.zeros([n[0]-p[0],p[1]]),h[:int(d[0]),:]))))
+            h = np.hstack((h[:,int(d[1]):],np.hstack((np.zeros([n[0],n[1]-p[1]]),h[:,:int(d[1])]))))
             y = np.real(pyl.ifft2(pyl.fft2(x)*pyl.fft2(h)))
     return y
